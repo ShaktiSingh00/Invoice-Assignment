@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Invoice SPA</title>
+
+  <!-- Styles -->
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+  <!-- Libraries -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.6/underscore-min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.4.1/backbone-min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+</head>
+
+<body>
+  <div id="app"></div>
+  <div id="invoice-list"></div>
+  
+  <script src="config.js"></script>
+  <script src="js/models/CustomerModel.js"></script>
+  <script src="js/controllers/InvoiceController.js"></script>
+  <script src="js/views/CustomerFormView.js"></script>
+  <script src="app.js"></script>
+  <script src="js/models/InvoiceModel.js"></script>
+  <script src="js/views/InvoiceListView.js"></script>
+  <script src="js/collections/InvoiceCollection.js"></script>
+  <script src="js/router/Router.js"></script>   
+
+  <script>
+     const appRouter = new AppRouter();
+     Backbone.history.start();
+  </script>
+
+</body>
+
+</html>
