@@ -48,19 +48,39 @@ const CustomerFormView = Backbone.View.extend({
   },
 
   addInvoiceItem: function () {
-    const row = $(`
-    <div class="invoice-item-row d-flex align-items-center gap-2 position-relative">
+    const $removeBtn = $(`
+    <div>
       <button type="button" class="btn btn-sm btn-outline-danger remove-item">❌</button>
-      <select class="form-select product-select" style="width: 200px;"></select>
-      <input type="number" class="form-control quantity" value="1" min="1" style="width: 80px;">
-      <input type="text" class="form-control unit-price" readonly placeholder="Price" style="width: 100px;">
-      <input type="text" class="form-control amount" readonly placeholder="Amount" style="width: 100px;">
     </div>
     `);
 
-    this.$("#invoice-items").append(row);
-    this.initializeSelect2(row.find(".product-select"));
+    const $productSelect = $(`
+    <div>
+      <select class="form-select product-select" style="width: 200px;"></select>
+    </div>
+    `);
+
+    const $quantityInput = $(`
+    <input type="number" class="form-control quantity" value="1" min="1" style="width: 80px;">
+    `);
+
+    const $unitPriceInput = $(`
+    <input type="text" class="form-control unit-price" readonly placeholder="Price" style="width: 100px;">
+    `);
+
+    const $amountInput = $(`
+    <input type="text" class="form-control amount" readonly placeholder="Amount" style="width: 100px;">
+    `);
+
+    const $row = $(`
+    <div class="invoice-item-row d-flex align-items-center gap-2 position-relative"></div>
+    `);
+
+    $row.append($removeBtn, $productSelect, $quantityInput, $unitPriceInput, $amountInput);
+    this.$("#invoice-items").append($row);
+    this.initializeSelect2($productSelect.find(".product-select"));
   },
+
 
   initializeSelect2: function ($select) {
     $select.select2({

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Invoice SPA</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- Styles -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
+
+
+  <!-- Libraries -->
+  <!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.6/underscore-min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.4.1/backbone-min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <style>
+    .select2-container {
+      width: 200px !important;
+      z-index: 1050;
+    }
+
+    .select2-dropdown {
+      z-index: 1051;
+    }
+
+    .select2-selection--single {
+      height: 38px !important;
+      padding: 0.375rem 0.75rem;
+      line-height: 1.5;
+      border: 1px solid #ced4da;
+      border-radius: 0.375rem;
+    }
+
+    .invoice-item-row {
+      position: relative;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app"></div>
+  <div id="invoice-list"></div>
+
+  <!-- Main Invoice List Template -->
+<script type="text/template" id="invoice-list-template">
+  <h2>All Invoices</h2>
+  <table class="table table-bordered table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>ID1</th>
+        <th>Customer Name</th>
+        <th>Invoice Date</th>
+        <th>Total Amount (Excl. GST)</th>
+        <th>Invoice Doc</th>
+      </tr>
+    </thead>
+    <tbody id="invoice-rows"></tbody>
+  </table>
+  <div id="pagination" class="d-flex flex-wrap gap-1 mt-3"></div>
+  <button id="back-home" class="btn btn-outline-secondary">← Back to Customer Form</button>
+</script>
+
+<!-- Invoice Row Template -->
+<script type="text/template" id="invoice-row-template">
+  <tr>
+    <td><%= id %></td>
+    <td><%= fields.id %></td>
+    <td><%= fields.customer_name || "N/A" %></td>
+    <td><%= fields.invoice_date || "N/A" %></td>
+    <td><%= fields.total_amount_excl_gst || "0.00" %></td>
+    <td>
+      <% if (dbvalues.invoice_file) { %>
+        <a href="<%= dbvalues.invoice_file %>" target="_blank">
+          <%= fields.invoice_file || "Download" %>
+        </a>
+      <% } %>
+    </td>
+  </tr>
+</script>
+
+
+  <script src="config.js"></script>
+  <script src="js/models/CustomerModel.js"></script>
+  <script src="js/views/CustomerFormView.js"></script>
+  <script src="app.js"></script>
+  <script src="js/models/InvoiceModel.js"></script>
+  <script src="js/views/InvoiceListView.js"></script>
+  <script src="js/collections/InvoiceCollection.js"></script>
+  <script src="js/router/Router.js"></script>
+
+  <script>
+    const appRouter = new AppRouter();
+    Backbone.history.start();
+  </script>
+
+</body>
+
+</html>

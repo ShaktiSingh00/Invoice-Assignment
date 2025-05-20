@@ -38,6 +38,8 @@ const InvoiceListView = Backbone.View.extend({
 
     this.collection.each(invoice => {
       const fields = invoice.get("fields") || {};
+      const dbvalues = invoice.get("dbvalues") || {};
+
       $tbody.append(`
         <tr>
           <td>${invoice.get("id")}</td>
@@ -45,11 +47,7 @@ const InvoiceListView = Backbone.View.extend({
           <td>${fields.customer_name || "N/A"}</td>
           <td>${fields.invoice_date || "N/A"}</td>
           <td>${fields.total_amount_excl_gst || "0.00"}</td>
-         <td>${fields.invoice_file ? `<a href="${dbvalues.invoice_file}">${fields.invoice_file}</a>`
-      : ''
-  }
-</td>
-
+          <td>${fields.invoice_file ? `<a href="${dbvalues.invoice_file}" target="_blank">Download</a>`: " "}</td> 
         </tr>
       `);
     });
